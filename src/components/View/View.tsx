@@ -1,23 +1,26 @@
 import axios from 'axios';
-import { useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { apiKeys, index } from '../../assets/data/data';
-import { CurrencyRate, ViewProps } from '../../assets/types/types';
+import { CurrencyRate } from '../../assets/types/types';
 import Charts from '../Charts/Charts';
 import DataError from '../DataError/DataError';
 import './View.scss';
 
 axios.defaults.baseURL = 'https://financialmodelingprep.com/';
 
-const View: React.FC<ViewProps> = ({
-  savedCurrencies,
-  dataError,
-  setDataError,
-}) => {
+export type ViewProps = {
+  savedCurrencies: string;
+  dataError: boolean;
+  setDataError: (arr: boolean) => void;
+};
+
+const View: FC<ViewProps> = ({ savedCurrencies, dataError, setDataError }) => {
   const [currencyPairRate, setCurrencyPairRate] = useState<CurrencyRate[]>([]);
   const [previousPairRate, setPreviousPairRate] = useState(0);
   const [priceColor, setPriceColor] = useState('white');
   const [errorStatus, setErrorStatus] = useState(0);
-  const [initialState, setInitialState] = useState(true);
+  const [beforeGetDataState, setbeforeGetDataState] = useState(true);
+  const [currencyPairActualPrice, setCurrencyPairActualPrice] = useState(0);
 
   const prevRateRef = useRef(0);
 
@@ -26,14 +29,13 @@ const View: React.FC<ViewProps> = ({
       .get(`api/v3/quote/${savedCurrencies}?apikey=${apiKeys[index]}`)
       .then(({ data }) => {
         setCurrencyPairRate(data);
-        setInitialState(false);
+        setbeforeGetDataState(false);
+        setCurrencyPairActualPrice(data[0].price);
       })
       .catch((error) => {
-        if (error) {
-          setDataError(true);
-          setErrorStatus(error.response.status);
-          setInitialState(true);
-        }
+        setDataError(true);
+        setErrorStatus(error.response.status);
+        setbeforeGetDataState(true);
       });
   };
 
@@ -44,17 +46,17 @@ const View: React.FC<ViewProps> = ({
   }, [savedCurrencies]);
 
   useEffect(() => {
-    if (currencyPairRate.length > 0 && !initialState) {
+    if (currencyPairRate.length > 0 && !beforeGetDataState) {
       const interval = setInterval(() => {
         getCurrencyRateData();
       }, 10000);
 
-      prevRateRef.current = currencyPairRate[0].price;
+      prevRateRef.current = currencyPairActualPrice;
       setPreviousPairRate(prevRateRef.current);
 
-      if (previousPairRate < currencyPairRate[0].price) {
+      if (previousPairRate < currencyPairActualPrice) {
         setPriceColor('green');
-      } else if (previousPairRate > currencyPairRate[0].price) {
+      } else if (previousPairRate > currencyPairActualPrice) {
         setPriceColor('red');
       }
 
@@ -77,7 +79,7 @@ const View: React.FC<ViewProps> = ({
               style={{ backgroundColor: priceColor }}
               title="currency pair"
             >
-              {`${currencyPairRate[0].name}  ${currencyPairRate[0].price}`}
+              {`${currencyPairRate[0].name}  ${currencyPairActualPrice}`}
             </div>
             <div
               className="view__currencies-main-changes"
@@ -91,7 +93,7 @@ const View: React.FC<ViewProps> = ({
         </div>
       ) : (
         <div className="view__initial-state">
-          {initialState ? 'Please choose currency pair' : 'Nothing found'}
+          {beforeGetDataState ? 'Please choose currency pair' : 'Nothing found'}
         </div>
       )}
     </>

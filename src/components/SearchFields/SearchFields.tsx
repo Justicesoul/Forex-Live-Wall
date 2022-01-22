@@ -1,13 +1,19 @@
-import { useEffect, useRef } from 'react';
-import { regex } from '../../assets/data/data';
-import { SearchFieldsProps } from '../../assets/types/types';
+import { FC, useEffect, useRef } from 'react';
+import { inputsValidation } from '../../assets/data/data';
 import './SearchFields.scss';
 
-const SearchFields: React.FC<SearchFieldsProps> = ({
+export type SearchFieldsProps = {
+  firstCurrencyValue: string;
+  onFirstCurrencyValueChange: (arr: string) => void;
+  secondCurrencyValue: string;
+  onSecondCurrencyValueChange: (arr: string) => void;
+};
+
+const SearchFields: FC<SearchFieldsProps> = ({
   firstCurrencyValue,
-  setFirstCurrencyValue,
+  onFirstCurrencyValueChange,
   secondCurrencyValue,
-  setSecondCurrencyValue,
+  onSecondCurrencyValueChange,
 }) => {
   const inputEl = useRef<HTMLInputElement>(null);
 
@@ -16,8 +22,8 @@ const SearchFields: React.FC<SearchFieldsProps> = ({
   }, []);
 
   const clickHandler = () => {
-    setFirstCurrencyValue(secondCurrencyValue);
-    setSecondCurrencyValue(firstCurrencyValue);
+    onFirstCurrencyValueChange(secondCurrencyValue);
+    onSecondCurrencyValueChange(firstCurrencyValue);
   };
 
   return (
@@ -31,8 +37,8 @@ const SearchFields: React.FC<SearchFieldsProps> = ({
         title="Only letters are available"
         maxLength={3}
         onChange={(e) => {
-          if (e.target.value === '' || regex.test(e.target.value))
-            setFirstCurrencyValue(e.target.value);
+          if (e.target.value === '' || inputsValidation.test(e.target.value))
+            onFirstCurrencyValueChange(e.target.value);
         }}
       />
       <button
@@ -50,8 +56,8 @@ const SearchFields: React.FC<SearchFieldsProps> = ({
         title="Only letters are available"
         maxLength={3}
         onChange={(e) => {
-          if (e.target.value === '' || regex.test(e.target.value))
-            setSecondCurrencyValue(e.target.value);
+          if (e.target.value === '' || inputsValidation.test(e.target.value))
+            onSecondCurrencyValueChange(e.target.value);
         }}
       />
     </div>

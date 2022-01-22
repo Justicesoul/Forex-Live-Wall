@@ -1,8 +1,13 @@
+import { FC } from 'react';
 import { timeFrameOptions } from '../../assets/data/data';
-import { TimeFramesProps } from '../../assets/types/types';
 import './TimeFrames.scss';
 
-const TimeFrames: React.FC<TimeFramesProps> = ({ onClick, timeFrame }) => {
+export type TimeFramesProps = {
+  onClick: (arr: string) => void;
+  timeFrame: string;
+};
+
+const TimeFrames: FC<TimeFramesProps> = ({ onClick, timeFrame }) => {
   return (
     <div className="time-frame">
       {timeFrameOptions.map((option) => (

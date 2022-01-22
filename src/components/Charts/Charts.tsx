@@ -2,19 +2,23 @@ import './Charts.scss';
 import { ApexOptions } from 'apexcharts';
 import ReactApexChart from 'react-apexcharts';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import TimeFrames from '../TimeFrames/TimeFrames';
-import { ChartsProps, HistoricalCharts } from '../../assets/types/types';
+import { HistoricalCharts } from '../../assets/types/types';
 import { apexState, apiKeys, index } from '../../assets/data/data';
 
 axios.defaults.baseURL = 'https://financialmodelingprep.com/';
 
-const Charts: React.FC<ChartsProps> = ({ savedCurrencies }) => {
+export type ChartsProps = {
+  savedCurrencies: string;
+};
+
+const Charts: FC<ChartsProps> = ({ savedCurrencies }) => {
   const [historicalCharts, setHistoricalCharts] = useState<HistoricalCharts[]>(
     []
   );
   const [chartState, setChartState] = useState<ApexOptions>(apexState);
-  const [initialState, setInitialState] = useState(true);
+  const [beforeDataLoadedState, setBeforeDataLoadedState] = useState(true);
   const [timeFrame, setTimeFrame] = useState('15min');
 
   const clickHandler = (arr: string) => {
@@ -30,7 +34,7 @@ const Charts: React.FC<ChartsProps> = ({ savedCurrencies }) => {
         setHistoricalCharts(data);
       })
       .finally(() => {
-        setInitialState(false);
+        setBeforeDataLoadedState(false);
       });
 
     const timeout = setTimeout(() => {
@@ -49,12 +53,12 @@ const Charts: React.FC<ChartsProps> = ({ savedCurrencies }) => {
       setChartState(dataForRanding);
     }, 0);
     return () => clearTimeout(timeout);
-  }, [savedCurrencies, initialState, historicalCharts]);
+  }, [savedCurrencies, beforeDataLoadedState, historicalCharts]);
 
   return (
-    <div>
+    <div className="wraper-container">
       <TimeFrames onClick={clickHandler} timeFrame={timeFrame} />
-      {!initialState && (
+      {!beforeDataLoadedState && (
         <ReactApexChart
           options={chartState}
           series={chartState.series}

@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 export const apexState = {
   series: [
     {
@@ -12,8 +14,10 @@ export const apiKeys = [
   '19d9ccfec1ff1750e9a69505e4c82203',
 ];
 
-export const index = 1;
+export const notify = () => toast.error('Please fill full currency codes');
 
-export const regex = /^[a-zA-Z]+$/;
+export const index = 2;
+
+export const inputsValidation = /^[a-zA-Z]+$/;
 
 export const timeFrameOptions = ['5min', '10min', '15min', '30min', '1hour', '4hour'];

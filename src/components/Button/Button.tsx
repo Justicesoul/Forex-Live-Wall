@@ -1,13 +1,15 @@
-import { ButtonProps } from '../../assets/types/types';
+import { FC } from 'react';
 import './Button.scss';
 
-const Button: React.FC<ButtonProps> = ({ onClick }) => {
+export type ButtonProps = {
+  onClick: () => void;
+};
+
+const Button: FC<ButtonProps> = ({ onClick }) => {
   return (
-    <div>
-      <button className="button" onClick={onClick}>
-        Search
-      </button>
-    </div>
+    <button className="button" onClick={onClick}>
+      Search
+    </button>
   );
 };
 

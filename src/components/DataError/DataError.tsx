@@ -1,7 +1,11 @@
-import { ErrorProps } from '../../assets/types/types';
+import { FC } from 'react';
 import './DataError.scss';
 
-const DataError: React.FC<ErrorProps> = ({ errorStatus }) => {
+export type ErrorProps = {
+  errorStatus: number;
+};
+
+const DataError: FC<ErrorProps> = ({ errorStatus }) => {
   return (
     <div className="data-error">
       {errorStatus === 403
