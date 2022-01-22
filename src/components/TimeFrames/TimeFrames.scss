@@ -1,0 +1,26 @@
+.time-frame__button {
+  font-size: 22px;
+  padding: 5px;
+  background-color: rgb(96, 146, 21);
+  color: white;
+  border-color: transparent;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.active {
+  color: rgb(96, 146, 21);
+  background-color: white;
+}
+
+.time-frame {
+  display: flex;
+  margin: 0 10px;
+}
+
+@media (max-width: 780px) {
+  .time-frame__button {
+    padding: 3px;
+    font-size: 12px;
+  }
+}

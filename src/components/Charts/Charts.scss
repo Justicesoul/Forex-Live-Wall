@@ -1,0 +1,11 @@
+.charts {
+  width: 750px;
+  height: 500px;
+}
+
+@media (max-width: 780px) {
+  .charts {
+    width: 280px;
+    height: 200px;
+  }
+}

@@ -1,28 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.scss';
+import Button from './components/Button/Button';
+import View from './components/View/View';
+import SearchFields from './components/SearchFields/SearchFields';
+import { Flip, toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Header from './components/Header/Header';
 
-const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Edit
-        {' '}
-        <code>src/App.tsx</code>
-        {' '}
-        and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </header>
-  </div>
-);
+const App = () => {
+  const [firstCurrencyValue, setFirstCurrencyValue] = useState('');
+  const [secondCurrencyValue, setSecondCurrencyValue] = useState('');
+  const [savedCurrencies, setSavedCurrencies] = useState('');
+  const [dataError, setDataError] = useState(false);
+
+  const notify = () => toast.error('Please fill full currency codes');
+
+  const clickHandler = () => {
+    const value = (firstCurrencyValue + secondCurrencyValue).toUpperCase();
+    if (value.length !== 6 && !dataError) {
+      notify();
+    } else {
+      setSavedCurrencies(value);
+    }
+  };
+
+  return (
+    <>
+      <Header />
+      <main className="main">
+        <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          transition={Flip}
+          theme={'dark'}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        <div className="container">
+          <SearchFields
+            firstCurrencyValue={firstCurrencyValue}
+            setFirstCurrencyValue={setFirstCurrencyValue}
+            secondCurrencyValue={secondCurrencyValue}
+            setSecondCurrencyValue={setSecondCurrencyValue}
+          />
+          <Button onClick={clickHandler} />
+        </div>
+
+        <View
+          savedCurrencies={savedCurrencies}
+          dataError={dataError}
+          setDataError={setDataError}
+        />
+      </main>
+    </>
+  );
+};
 
 export default App;

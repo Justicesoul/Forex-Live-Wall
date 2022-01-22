@@ -1,0 +1,27 @@
+.header {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  background-image: url('https://g.foolcdn.com/editorial/images/656662/why-facebook-stock-is-up-meta-platforms-fb.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-bottom: 20px;
+}
+
+.header__container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.header__logo {
+  width: 100px;
+}
+
+h1 {
+  line-height: 0;
+}
+
+h2 {
+  line-height: 45px;
+}
