@@ -32,7 +32,6 @@ const Charts: FC<ChartsProps> = ({ savedCurrencies }) => {
       )
       .then(({ data }) => {
         setHistoricalCharts(data);
-        console.log(data);
       })
       .finally(() => {
         setBeforeDataLoadedState(false);
