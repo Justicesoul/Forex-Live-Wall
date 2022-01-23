@@ -16,6 +16,7 @@ const App = () => {
 
   const clickHandlerSearch = () => {
     const value = (firstCurrencyValue + secondCurrencyValue).toUpperCase();
+
     if (value.length !== 6 && !dataError) {
       notify();
     } else {
