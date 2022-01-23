@@ -21,7 +21,7 @@ const SearchFields: FC<SearchFieldsProps> = ({
     inputEl.current?.focus();
   }, []);
 
-  const clickHandler = () => {
+  const clickHandlerTurnOverTickers = () => {
     onFirstCurrencyValueChange(secondCurrencyValue);
     onSecondCurrencyValueChange(firstCurrencyValue);
   };
@@ -44,7 +44,7 @@ const SearchFields: FC<SearchFieldsProps> = ({
       <button
         title="Turn over the currencies"
         className="search-field__turn-over-button"
-        onClick={clickHandler}
+        onClick={clickHandlerTurnOverTickers}
       >
         ⇄
       </button>

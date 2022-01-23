@@ -14,7 +14,7 @@ const App = () => {
   const [savedCurrencies, setSavedCurrencies] = useState('');
   const [dataError, setDataError] = useState(false);
 
-  const clickHandler = () => {
+  const clickHandlerSearch = () => {
     const value = (firstCurrencyValue + secondCurrencyValue).toUpperCase();
     if (value.length !== 6 && !dataError) {
       notify();
@@ -47,7 +47,7 @@ const App = () => {
             secondCurrencyValue={secondCurrencyValue}
             onSecondCurrencyValueChange={setSecondCurrencyValue}
           />
-          <Button onClick={clickHandler} />
+          <Button onClick={clickHandlerSearch} />
         </div>
 
         <View
