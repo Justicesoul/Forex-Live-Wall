@@ -28,6 +28,7 @@ const View: FC<ViewProps> = ({ savedCurrencies, dataError, setDataError }) => {
       .get(`api/v3/quote/${savedCurrencies}?apikey=${apiKeys[index]}`)
       .then(({ data }) => {
         setCurrencyPairRate(data);
+        console.log(data);
         setBeforeGetDataState(false);
       })
       .catch((error) => {

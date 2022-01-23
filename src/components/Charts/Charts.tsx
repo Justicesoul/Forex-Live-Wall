@@ -36,7 +36,7 @@ const Charts: FC<ChartsProps> = ({ savedCurrencies }) => {
       .finally(() => {
         setBeforeDataLoadedState(false);
       });
-  }, [timeFrame, savedCurrencies]);
+  }, [timeFrame, beforeDataLoadedState, savedCurrencies]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
