@@ -32,11 +32,14 @@ const Charts: FC<ChartsProps> = ({ savedCurrencies }) => {
       )
       .then(({ data }) => {
         setHistoricalCharts(data);
+        console.log(data);
       })
       .finally(() => {
         setBeforeDataLoadedState(false);
       });
+  }, [timeFrame, savedCurrencies]);
 
+  useEffect(() => {
     const timeout = setTimeout(() => {
       const dataHistory = historicalCharts.map(
         ({ date, open, low, high, close }) => {
