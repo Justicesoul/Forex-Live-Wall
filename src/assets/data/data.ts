@@ -16,7 +16,7 @@ export const apiKeys = [
 
 export const notify = () => toast.error('Please fill full currency codes');
 
-export const index = 2;
+export const index = 1;
 
 export const inputsValidation = /^[a-zA-Z]+$/;
 
