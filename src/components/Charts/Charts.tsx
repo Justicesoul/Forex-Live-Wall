@@ -39,23 +39,20 @@ const Charts: FC<ChartsProps> = ({ savedCurrencies }) => {
   }, [timeFrame, beforeDataLoadedState, savedCurrencies]);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      const dataHistory = historicalCharts.map(
-        ({ date, open, low, high, close }) => {
-          return { x: date, y: [open, low, high, close] };
-        }
-      );
-      const dataForRanding = {
-        series: [
-          {
-            data: dataHistory.slice(0, 100).reverse(),
-          },
-        ],
-      };
-      setChartState(dataForRanding);
-    }, 0);
-    return () => clearTimeout(timeout);
-  }, [savedCurrencies, beforeDataLoadedState, historicalCharts]);
+    const dataHistory = historicalCharts.map(
+      ({ date, open, low, high, close }) => {
+        return { x: date, y: [open, low, high, close] };
+      }
+    );
+    const dataForRanding = {
+      series: [
+        {
+          data: dataHistory.slice(0, 100).reverse(),
+        },
+      ],
+    };
+    setChartState(dataForRanding);
+  }, [historicalCharts]);
 
   return (
     <div className="wraper-container">
