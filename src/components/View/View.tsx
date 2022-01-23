@@ -19,8 +19,7 @@ const View: FC<ViewProps> = ({ savedCurrencies, dataError, setDataError }) => {
   const [previousPairRate, setPreviousPairRate] = useState(0);
   const [priceColor, setPriceColor] = useState('white');
   const [errorStatus, setErrorStatus] = useState(0);
-  const [beforeGetDataState, setbeforeGetDataState] = useState(true);
-  const [currencyPairActualPrice, setCurrencyPairActualPrice] = useState(0);
+  const [beforeGetDataState, setBeforeGetDataState] = useState(true);
 
   const prevRateRef = useRef(0);
 
@@ -29,13 +28,12 @@ const View: FC<ViewProps> = ({ savedCurrencies, dataError, setDataError }) => {
       .get(`api/v3/quote/${savedCurrencies}?apikey=${apiKeys[index]}`)
       .then(({ data }) => {
         setCurrencyPairRate(data);
-        setbeforeGetDataState(false);
-        setCurrencyPairActualPrice(data[0].price);
+        setBeforeGetDataState(false);
       })
       .catch((error) => {
         setDataError(true);
         setErrorStatus(error.response.status);
-        setbeforeGetDataState(true);
+        setBeforeGetDataState(true);
       });
   };
 
@@ -51,12 +49,12 @@ const View: FC<ViewProps> = ({ savedCurrencies, dataError, setDataError }) => {
         getCurrencyRateData();
       }, 10000);
 
-      prevRateRef.current = currencyPairActualPrice;
+      prevRateRef.current = currencyPairRate[0].price;
       setPreviousPairRate(prevRateRef.current);
 
-      if (previousPairRate < currencyPairActualPrice) {
+      if (previousPairRate < currencyPairRate[0].price) {
         setPriceColor('green');
-      } else if (previousPairRate > currencyPairActualPrice) {
+      } else if (previousPairRate > currencyPairRate[0].price) {
         setPriceColor('red');
       }
 
@@ -79,7 +77,7 @@ const View: FC<ViewProps> = ({ savedCurrencies, dataError, setDataError }) => {
               style={{ backgroundColor: priceColor }}
               title="currency pair"
             >
-              {`${currencyPairRate[0].name}  ${currencyPairActualPrice}`}
+              {`${currencyPairRate[0].name}  ${currencyPairRate[0].price}`}
             </div>
             <div
               className="view__currencies-main-changes"
