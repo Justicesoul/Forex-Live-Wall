@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Forex-Live-Wall/static/css/main.e689302a.chunk.css",
-    "main.js": "/Forex-Live-Wall/static/js/main.3b84b789.chunk.js",
-    "main.js.map": "/Forex-Live-Wall/static/js/main.3b84b789.chunk.js.map",
+    "main.js": "/Forex-Live-Wall/static/js/main.be919fa6.chunk.js",
+    "main.js.map": "/Forex-Live-Wall/static/js/main.be919fa6.chunk.js.map",
     "runtime-main.js": "/Forex-Live-Wall/static/js/runtime-main.19f17bb8.js",
     "runtime-main.js.map": "/Forex-Live-Wall/static/js/runtime-main.19f17bb8.js.map",
     "static/css/2.f4c56af9.chunk.css": "/Forex-Live-Wall/static/css/2.f4c56af9.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.f4c56af9.chunk.css",
     "static/js/2.7e4caa1b.chunk.js",
     "static/css/main.e689302a.chunk.css",
-    "static/js/main.3b84b789.chunk.js"
+    "static/js/main.be919fa6.chunk.js"
   ]
 }
