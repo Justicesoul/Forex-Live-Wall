@@ -1,5 +1,7 @@
 # Forex live wall
 
+### You can find project page here => https://justicesoul.github.io/Forex-Live-Wall/
+
 ![Project GIF](src/assets/images/projectRecord.gif)
 
 ## Project architecture
