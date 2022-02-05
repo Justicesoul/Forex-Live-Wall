@@ -6,7 +6,11 @@ const Header = () => {
       <h1>Forex Live Wall</h1>
       <div className="header__container">
         <h2>Powered by</h2>
-        <img className="header__logo" src="images/28Stone.svg" alt="28stone" />
+        <img
+          className="header__logo"
+          src="https://icon-library.com/images/icon-forex/icon-forex-10.jpg"
+          alt="28stone"
+        />
       </div>
     </header>
   );
