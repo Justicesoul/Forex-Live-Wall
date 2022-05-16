@@ -1,16 +1,12 @@
-# Forex live wall
+# Ubiquity devices
 
-### You can find project page here => https://justicesoul.github.io/Forex-Live-Wall/
+### You can find project page here => https://justicesoul.github.io/DevicesApp/
 
-![Project GIF](src/assets/images/projectRecord.gif)
+## Next steps
 
-## Project architecture
-
-The app has two instances for tickers of the two currencies. In these you can only enter Latin letters. You can change the direction of the search by pressing ⇄ button between two inputs. The currencies data updates every 10 seconds. There are 6 types of historical charts available, varying by time frames.
-
-The application has mobile adaptive layout.
-
-If you have "Data request limit reached for today" error, you can switch apyKey in ./src/assets/data.ts by change "index" variable (only 0-2 are available)
+1. Add pagination for easy browsing for a more customer-friendly experience.
+2. Establish routing for navigation by links.
+3. In the case of an application extension, it is worth to add state manager (Redux).
 
 ## Available Scripts
 
